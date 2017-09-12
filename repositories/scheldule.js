@@ -3,10 +3,10 @@ const path = require('path')
 const file = path.resolve('./data/scheldule.json')
 const data = jsonfile.readFileSync(file)
 const SchelduleRepository = {
-  GetSchelduleItem: getSchelduleItem
+  GetSchelduleItems: getSchelduleItems
 }
 
-function getSchelduleItem ({ day, week, maxTime, minTime } = {}) {
+function getSchelduleItems ({ day, week, maxTime, minTime } = {}) {
   let returnData = data.filter(item => {
     let itemTime = new Date()
     itemTime.setHours(Number(item.Time.split(':')[0]))

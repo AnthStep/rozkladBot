@@ -1,10 +1,17 @@
-const schelduleLoop = setInterval(checkScheldule, 60000)
 const SchelduleRepository = require('./../repositories/scheldule')
+const DispatchServiceClass = require('./dispatch')
 
-function checkScheldule () {
-  let timeStamp = new Date()
-  let Day = (timeStamp.getDay() || 7) + ''
-  
+function checkScheldule (checkPeriod, bot) {
+  return function () {
+    let timeStamp = new Date()
+    let Day = (timeStamp.getDay() || 7) + ''
+    let Week = (getWeekNumber() % 2) + 1 + ''
+    let minTime = timeStamp.getTime() + 30 * checkPeriod
+    let maxTime = timeStamp.getTime() + 30 * checkPeriod + (30 * checkPeriod - 1)
+    console.log(`${timeStamp.getHours}:${timeStamp.getHours} - sheldule cheked`)
+    const DispatchService = new DispatchServiceClass(bot)
+    DispatchService.sendSchelduleItems(SchelduleRepository.GetSchelduleItems(Day, Week, minTime, maxTime))
+  }
 }
 
 function getWeekNumber (d = new Date()) {
@@ -18,8 +25,24 @@ function getWeekNumber (d = new Date()) {
   }
 }
 
-Date.prototype.getWeek = function() {
+class SchelduleLoop {
+  constructor (bot) {
+    this.bot = bot
+  }
 
+  startLoop (checkPeriod = 60000) {
+    if (this.loop) {
+      clearInterval(this.loop)
+    }
+    this.loop = setInterval(checkScheldule(checkPeriod, this.bot), checkPeriod)
+  }
+
+  stopLoop () {
+    if (this.loop) {
+      clearInterval(this.loop)
+      this.loop = null
+    }
+  }
 }
 
-module.exports = schelduleLoop
+module.exports = SchelduleLoop
