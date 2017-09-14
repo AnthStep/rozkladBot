@@ -8,7 +8,7 @@ const SchelduleRepository = {
 
 function getSchelduleItems ({ day, week, maxTime, minTime } = {}) {
   let returnData = data.filter(item => {
-    let itemTime = new Date()
+    let itemTime = new Date((new Date()).getTime() + (60 * 60 * 1000 * 3))
     itemTime.setHours(Number(item.Time.split(':')[0]))
     itemTime.setMinutes(Number(item.Time.split(':')[1]))
     itemTime.setSeconds(0)
