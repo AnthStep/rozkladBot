@@ -9,8 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.1",
     "eslint": "^4.6.1",
     "eslint-plugin-node": "^5.1.1",
+    "express": "^4.15.4",
     "jsonfile": "^3.0.1",
     "node-telegram-bot-api": "^0.28.0"
   },

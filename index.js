@@ -1,4 +1,5 @@
 const bot = require('./bot')
+require('./web')(bot)
 console.log('Bot started...')
 require('./routes/registration.js')(bot)
 const SchelduleLoop = new (require('./services/schelduleloop'))(bot)
