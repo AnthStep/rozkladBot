@@ -8,10 +8,14 @@ class DispatchService {
   sendSchelduleItems (items) {
     let users = UserRepository.GetUsersList()
     items.forEach(item => {
-      let sendedMessage = encodeURIComponent(`${item.Title} \n ${item.Time} \n ${item.Housing}-${item.ClassRoom} \n ${item.Teacher}`)
+      let sendedMessage = `Следующая пара:
+${item.Title}
+Начало в ${item.Time} 
+Корпус №${item.Housing}, кабинет №${item.Classroom} 
+Преподаватель: ${item.Teacher}`
       users.forEach(user => {
         this.bot.sendMessage(user, sendedMessage)
-        console.log(`Message sended to user - ${user}`)
+        console.log(`Scheld sended to user - ${user}`)
       })
     })
   }

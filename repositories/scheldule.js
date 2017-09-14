@@ -13,9 +13,10 @@ function getSchelduleItems ({ day, week, maxTime, minTime } = {}) {
     itemTime.setMinutes(Number(item.Time.split(':')[1]))
     itemTime.setSeconds(0)
     itemTime.getTime()
-    if ((day && (day !== item.Day)) || (week && (week !== item.Week)) || (minTime > itemTime) || (maxTime < itemTime)) {
+    if ((day && (day !== item.Day)) || (week && item.Week && (week !== item.Week)) || (minTime && (minTime > itemTime)) || (maxTime && (maxTime < itemTime))) {
       return false
     }
+    console.log(item)
     return true
   })
 

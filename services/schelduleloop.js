@@ -4,13 +4,13 @@ const DispatchServiceClass = require('./dispatch')
 function checkScheldule (checkPeriod, bot) {
   return function () {
     let timeStamp = new Date()
-    let Day = (timeStamp.getDay() || 7) + ''
-    let Week = (getWeekNumber() % 2) + 1 + ''
+    let day = (timeStamp.getDay() || 7) + ''
+    let week = (getWeekNumber() % 2) + 1 + ''
     let minTime = timeStamp.getTime() + 30 * checkPeriod
     let maxTime = timeStamp.getTime() + 30 * checkPeriod + (30 * checkPeriod - 1)
-    console.log(`${timeStamp.getHours}:${timeStamp.getHours} - sheldule cheked`)
+    console.log(`${timeStamp.getHours()}:${timeStamp.getMinutes()} - sheldule cheked`)
     const DispatchService = new DispatchServiceClass(bot)
-    DispatchService.sendSchelduleItems(SchelduleRepository.GetSchelduleItems(Day, Week, minTime, maxTime))
+    DispatchService.sendSchelduleItems(SchelduleRepository.GetSchelduleItems({day, week, minTime, maxTime}))
   }
 }
 
