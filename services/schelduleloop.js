@@ -3,7 +3,7 @@ const DispatchServiceClass = require('./dispatch')
 
 function checkScheldule (checkPeriod, bot) {
   return function () {
-    let timeStamp = new Date()
+    let timeStamp = new Date((new Date()) + (60 * 60 * 1000))
     let day = (timeStamp.getDay() || 7) + ''
     let week = (getWeekNumber() % 2) + 1 + ''
     let minTime = timeStamp.getTime() + 30 * checkPeriod
